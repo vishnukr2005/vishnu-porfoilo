@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Vishnu's Portfolio</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="portfolio.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="work.html">Projects</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTACT -->
+    <section id="contact-page" class="visible">
+        <div class="container">
+            <div class="content-section">
+                <h2>Get In Touch</h2>
+                <p style="text-align: center; margin-bottom: 2.5rem;">
+                    Whether you have a question, a project idea, or just want to say hi, I'd love to hear from you!
+                </p>
+
+                <form id="contactForm">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <textarea id="message" placeholder="Drop a message..." required></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+
+                <div class="contact-info" style="margin-top: 3rem;">
+                    <p><i class="fas fa-envelope" style="color: #bb86fc; margin-right: 10px;"></i>
+                        vishnusappidi12@example.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: #bb86fc; margin-right: 10px;"></i> Amalapuram,
+                        India</p>
+
+                    <div class="social-links" style="margin-top: 2rem;">
+                        <a href="https://github.com/Start-sys-del" target="_blank" title="GitHub"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/YOUR-PROFILE" target="_blank" title="LinkedIn"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:vishnusappidi12@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Vishnu — Made with passion </p>
+        </div>
+    </footer>
+
+    <script>
+        // Form
+        document.getElementById('contactForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('message').value.trim();
+
+            if (!name || !email || !msg) {
+                alert('Please fill all fields!');
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Please enter a valid email!');
+                return;
+            }
+
+            alert('Thanks ' + name + '! Your message has been sent successfully (demo).');
+            this.reset();
+        });
+    </script>
+
+</body>
+
+</html>

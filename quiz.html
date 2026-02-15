@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Railways Quiz Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  color:#eaf3ff;
+
+  /* 🚆 YOUR TRAIN IMAGE AS BACKGROUND */
+  background:
+    linear-gradient(rgba(5,15,30,0.88), rgba(5,15,30,0.88)),
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACAAAAASACAYAAABrt62cAAAQAElEQVR4AexdBWAdx9H+7j090ROzZMvMzMx2zOwwY5M00DBjG2iTv224abhhZjLFMcWOHcfMzGyLGf75Vjr5WRaDLTsje9/dLczufrs7Ozuzt+foFNsgX51ioH1A+4D2Ae0D2ge0D2gf0D6gfUD7gPYB...");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+
+/* Main Card */
+.container{
+  max-width:760px;
+  width:100%;
+  background:rgba(15,28,45,0.95);
+  border-radius:18px;
+  padding:32px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  border:1px solid rgba(79,195,247,0.2);
+}
+
+.screen{display:none;}
+.screen.active{display:block;}
+
+h1{
+  text-align:center;
+  color:#4fc3f7;
+  margin-bottom:16px;
+  font-size:2.4rem;
+}
+
+p{
+  text-align:center;
+  color:#b3d4ff;
+  margin-bottom:28px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  color:#81d4fa;
+  font-weight:500;
+}
+
+select{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #5b9bd5;
+  background:#0d1b28;
+  color:#fff;
+  font-size:1rem;
+  margin-bottom:20px;
+}
+
+.btn{
+  width:100%;
+  padding:15px;
+  font-size:1.1rem;
+  font-weight:600;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.primary{
+  background:linear-gradient(90deg,#0288d1,#0277bd);
+  color:#fff;
+}
+
+.primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(2,136,209,0.5);
+}
+
+/* Quiz */
+.quiz-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.progress{
+  flex:1;
+  height:10px;
+  background:rgba(255,255,255,0.2);
+  border-radius:5px;
+  overflow:hidden;
+}
+
+#progress-fill{
+  height:100%;
+  width:0%;
+  background:#4fc3f7;
+}
+
+.timer{
+  color:#ffca28;
+  font-weight:600;
+}
+
+#question{
+  font-size:1.3rem;
+  margin-bottom:18px;
+}
+
+.options{
+  display:grid;
+  gap:14px;
+  margin-bottom:24px;
+}
+
+.option{
+  background:rgba(255,255,255,0.1);
+  padding:16px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.option:hover{
+  background:rgba(255,255,255,0.18);
+}
+
+.option.selected{
+  background:#0288d1;
+}
+
+.controls{
+  display:flex;
+  gap:12px;
+}
+
+/* Result */
+.result-box{
+  background:rgba(0,0,0,0.4);
+  padding:24px;
+  border-radius:14px;
+  margin:24px 0;
+  text-align:center;
+  font-size:1.2rem;
+}
+
+@media(max-width:520px){
+  .controls{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Start -->
+<div id="start" class="screen active">
+<h1>Indian Railways Quiz</h1>
+<p>RRB NTPC • Group D • ALP • JE Practice</p>
+
+<label>Category</label>
+<select>
+<option>All</option>
+<option>History</option>
+<option>Zones</option>
+<option>Trains</option>
+</select>
+
+<label>Difficulty</label>
+<select>
+<option>All</option>
+<option>Easy</option>
+<option>Medium</option>
+<option>Hard</option>
+</select>
+
+<button class="btn primary" onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<!-- Quiz -->
+<div id="quiz" class="screen">
+<div class="quiz-header">
+<div class="progress"><div id="progress-fill"></div></div>
+<div class="timer">⏱ <span id="time">15</span>s</div>
+</div>
+
+<div id="question"></div>
+<div id="options" class="options"></div>
+
+<div class="controls">
+<button class="btn" onclick="prev()">Previous</button>
+<button class="btn primary" onclick="next()">Next</button>
+</div>
+</div>
+
+<!-- Result -->
+<div id="result" class="screen">
+<h1>Result</h1>
+<div class="result-box">
+<div>Total Questions: <span id="total"></span></div>
+<div>Correct Answers: <span id="correct"></span></div>
+<div>Score: <span id="percent"></span>%</div>
+</div>
+<button class="btn primary" onclick="location.reload()">Restart</button>
+</div>
+
+</div>
+
+<script>
+const questions=[
+{q:"First passenger train in India ran in which year?",o:["1853","1848","1865","1870"],a:0},
+{q:"Father of Indian Railways is?",o:["Lord Dalhousie","Lord Curzon","Lord Ripon","Lord Canning"],a:0},
+{q:"Total railway zones in India?",o:["16","17","18","19"],a:2}
+];
+
+let i=0,score=0,time=15,timer;
+
+function show(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+i=0;score=0;
+show('quiz');
+load();
+startTimer();
+}
+
+function load(){
+document.getElementById('question').innerText=questions[i].q;
+const opt=document.getElementById('options');
+opt.innerHTML="";
+questions[i].o.forEach((t,idx)=>{
+const d=document.createElement('div');
+d.className='option';
+d.innerText=t;
+d.onclick=()=>select(idx,d);
+opt.appendChild(d);
+});
+document.getElementById('progress-fill').style.width=((i+1)/questions.length)*100+"%";
+}
+
+function select(idx,el){
+document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+el.classList.add('selected');
+if(idx===questions[i].a)score++;
+}
+
+function next(){
+if(i<questions.length-1){i++;resetTimer();load();}
+else end();
+}
+
+function prev(){
+if(i>0){i--;resetTimer();load();}
+}
+
+function startTimer(){
+time=15;
+document.getElementById('time').innerText=time;
+timer=setInterval(()=>{
+time--;
+document.getElementById('time').innerText=time;
+if(time===0)next();
+},1000);
+}
+
+function resetTimer(){
+clearInterval(timer);
+startTimer();
+}
+
+function end(){
+clearInterval(timer);
+show('result');
+document.getElementById('total').innerText=questions.length;
+document.getElementById('correct').innerText=score;
+document.getElementById('percent').innerText=Math.round(score/questions.length*100);
+}
+</script>
+
+</body>
+</html>

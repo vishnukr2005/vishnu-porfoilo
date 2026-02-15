@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishnu - Computer Science Portfolio</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="portfolio.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="work.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="visible">
+    <div class="container">
+      <img src="img.jpeg" alt="Vishnu" class="profile-pic" loading="lazy">
+      <h1>Hi, I'm Vishnu!</h1>
+      <p>Computer Science Student • Graduating 2026 • Passionate Coder & Web Enthusiast</p>
+      <div>
+        <a href="work.html" class="btn">Explore My Projects</a>
+        <a href="contact.html" class="btn btn-outline">Let's Connect</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brief Intro / Teaser -->
+  <section id="about-teaser" class="visible">
+    <div class="container">
+      <div class="content-section" style="text-align: center;">
+        <h2>Building the Future, One Line of Code at a Time</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">
+          I specialize in building interactive web applications and solving complex problems.
+          Check out my work or get in touch to collaborate!
+        </p>
+        <a href="about.html" class="btn btn-outline">More About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Vishnu — Made with passion </p>
+      <div class="social-links">
+        <a href="https://github.com/Start-sys-del" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/YOUR-PROFILE" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal (simplified for Home)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+  </script>
+
+</body>
+
+</html>
